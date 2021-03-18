@@ -6,6 +6,7 @@
 #include <fstream>
 #include <queue>   
 #include <utility>
+#include <cctype>
 
 
 /**
@@ -74,10 +75,35 @@ std::vector<std::string> read_words(){
 
 }
 
+/**
+ * Checks if the string only contains alphabets.
+ * @param a String to be tested.
+ * @return True if the string only contains alphabets, else false.
+ */
+bool isalpha(const std::string &a){
+
+    for(char x : a){
+        if(!std::isalpha(x)){
+            return false;
+        }
+    }
+
+    return true;
+
+}
+
 int main(){
 
-    const std::string a = "dnosaur";
-    const size_t num_sug = 10;
+    const size_t NUM_SUGGESTIONS = 10;
+    
+    std::string input_word{};
+
+    while(input_word.length() < 1 || !isalpha(input_word)){
+        std::cout << "Enter your word." << std::endl;
+        std::cin >> input_word;
+    }
+    
+    std::transform (input_word.begin(), input_word.end(), input_word.begin(), ::tolower);
 
     std::vector<std::string> words = read_words();
 
@@ -85,15 +111,16 @@ int main(){
         return a.second > b.second;
     };
 
-    std::priority_queue<std::pair<std::string, int>, std::vector<std::pair<std::string, int>>, decltype(compare)> sug(compare);
+    std::priority_queue<std::pair<std::string, int>, std::vector<std::pair<std::string, int>>, decltype(compare)> suggestions(compare);
 
     for (size_t i = 0; i < words.size(); i++){
-        sug.push(std::pair<std::string, int>{words.at(i), lev(a, words.at(i))});
+        suggestions.push(std::pair<std::string, int>{words.at(i), lev(input_word, words.at(i))});
     }
 
-    for (size_t i = 0; i < std::min(num_sug, sug.size()); i++){
-        std::cout << sug.top().first << std::endl;
-        sug.pop();
+    std::cout << "Suggestions" << std::endl;
+    for (size_t i = 0; i < std::min(NUM_SUGGESTIONS, suggestions.size()); i++){
+        std::cout << suggestions.top().first << std::endl;
+        suggestions.pop();
     }
 
     return 0;
