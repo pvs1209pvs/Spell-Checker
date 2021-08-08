@@ -119,7 +119,7 @@ int main(){
 
     std::cout << "Suggestions" << std::endl;
     for (size_t i = 0; i < std::min(NUM_SUGGESTIONS, suggestions.size()); i++){
-        std::cout << suggestions.top().first << std::endl;
+        std::cout << i << ". "<< suggestions.top().first << std::endl;
         suggestions.pop();
     }
 
