@@ -1,0 +1,5 @@
+/home/param/Desktop/Spell-Checker/build/CMakeFiles/edit_cache.dir
+/home/param/Desktop/Spell-Checker/build/CMakeFiles/package_source.dir
+/home/param/Desktop/Spell-Checker/build/CMakeFiles/rebuild_cache.dir
+/home/param/Desktop/Spell-Checker/build/CMakeFiles/package.dir
+/home/param/Desktop/Spell-Checker/build/CMakeFiles/Spell-Checker.dir
