@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/SpellCheckerTesting.dir/main.cpp.o CMakeFiles/SpellCheckerTesting.dir/home/param/Desktop/Spell-Checker/src/levenshtein.cpp.o  -o SpellCheckerTesting  /usr/lib/x86_64-linux-gnu/libgtest.a -lpthread 

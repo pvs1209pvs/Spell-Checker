@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/param/Desktop/Spell-Checker/src/levenshtein.h
+string
+-
+vector
+-
+
+/home/param/Desktop/Spell-Checker/test/main.cpp
+gtest/gtest.h
+-
+levenshtein.h
+/home/param/Desktop/Spell-Checker/test/levenshtein.h
+

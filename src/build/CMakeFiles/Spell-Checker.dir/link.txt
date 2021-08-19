@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/Spell-Checker.dir/main.cpp.o CMakeFiles/Spell-Checker.dir/levenshtein.cpp.o  -o Spell-Checker 

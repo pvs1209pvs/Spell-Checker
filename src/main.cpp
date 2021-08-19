@@ -7,95 +7,10 @@
 #include <queue>   
 #include <utility>
 #include <cctype>
-
-
-/**
- * Finds the cost for single row.
- * @param a String goes left to right.
- * @param b String goes top to bottom.
- * @param itr Iteration number.
- * @param cost_mtx Current cost.
- */ 
-void lev(const std::string &a, const std::string &b, int itr, int * cost_mtx){
-
-    int dig = cost_mtx[0];
-    int top = 0;
-    int left = itr+1;
-
-    for (size_t i = 1; i < a.length()+1; ++i){
-        top = cost_mtx[i];
-        left = (a[i-1] != b[itr]) ? std::min({dig, top, left})+1 : dig;
-        dig = top;
-        cost_mtx[i-1] = left;
-    }
-
-    std::rotate(&cost_mtx[0], &cost_mtx[a.length()], &cost_mtx[a.length()+1]);
-    cost_mtx[0] = itr+1;
-  
-}
-
-/**
- * Returns the levenshtein edit distance.
- * @param a First string.
- * @param b Second string.
- * @return Levenshtein edit distance.
- */
-int lev(const std::string &a, const std::string &b){
-
-    int cost_mtx[a.length()+1];
-    for (size_t i = 0; i < a.length()+1; ++i){
-        cost_mtx[i] = i;
-    }
-
-    for (size_t i = 0; i < b.length(); ++i){
-        lev(a, b, i, cost_mtx);
-    }
-
-    return cost_mtx[a.length()];
-    
-}
-
-/**
- * Reads words from english3.txt.
- * @return Returns all the words from the file. 
- */
-std::vector<std::string> read_words(){
-    
-    std::vector<std::string> words{};
-
-    std::ifstream dict("../res/english3.txt");
-
-    std::string line;
-
-    while(std::getline(dict, line)){
-        words.push_back(line);
-    }
-
-    return words;
-
-}
-
-/**
- * Checks if the string only contains alphabets.
- * @param a String to be tested.
- * @return True if the string only contains alphabets, else false.
- */
-bool isalpha(const std::string &a){
-
-    for(char x : a){
-        if(!std::isalpha(x)){
-            return false;
-        }
-    }
-
-    return true;
-
-}
+#include "levenshtein.h"
 
 int main(){
 
-    const size_t NUM_SUGGESTIONS = 10;
-    
     std::string input_word{};
 
     while(input_word.length() < 1 || !isalpha(input_word)){
@@ -118,9 +33,10 @@ int main(){
     }
 
     std::cout << "Suggestions" << std::endl;
-    for (size_t i = 0; i < std::min(NUM_SUGGESTIONS, suggestions.size()); i++){
-        std::cout << i << ". "<< suggestions.top().first << std::endl;
-        suggestions.pop();
+    std::vector<std::string> corrected = list_suggestions(input_word);
+
+    for(std::string s : corrected){
+        std::cout << s << std::endl;
     }
 
     return 0;
